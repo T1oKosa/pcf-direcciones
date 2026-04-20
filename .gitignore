@@ -1,0 +1,22 @@
+# Dependencias
+node_modules/
+
+# Salida PCF / build
+out/
+bin/
+obj/
+
+# Logs
+*.log
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Env / secretos (no subir keys)
+.env
+.env.*
+!.env.example

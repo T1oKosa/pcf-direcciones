@@ -1,0 +1,244 @@
+/**
+ * DireccionesControl.css
+ * Estilos del PCF DireccionesControl.
+ *
+ * Diseño basado en los design tokens de Fluent UI 2 (Fluent Design System)
+ * para integrarse visualmente con los formularios nativos de Dynamics 365.
+ * No usa dependencias externas — CSS puro para máxima compatibilidad con
+ * el sandbox de PCF de D365.
+ *
+ * Referencia de tokens: https://react.fluentui.dev/?path=/docs/theme-colors--page
+ */
+
+/* ─── Reset y base ─────────────────────────────────────────────────────────── */
+
+.pcf-dir-root {
+  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #242424; /* colorNeutralForeground1 */
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.pcf-dir-root *,
+.pcf-dir-root *::before,
+.pcf-dir-root *::after {
+  box-sizing: inherit;
+}
+
+/* ─── Wrapper principal ────────────────────────────────────────────────────── */
+
+.pcf-dir-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* ─── Input wrapper (input + spinner) ─────────────────────────────────────── */
+
+.pcf-dir-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* ─── Input — Fluent UI TextField ─────────────────────────────────────────── */
+
+.pcf-dir-input {
+  width: 100%;
+  min-height: 32px;
+  padding: 4px 12px;
+  border: 1px solid #d1d1d1; /* colorNeutralStroke1 */
+  border-radius: 4px;        /* borderRadiusMedium */
+  font-family: inherit;
+  font-size: 14px;           /* fontSizeBase300 */
+  line-height: 20px;         /* lineHeightBase300 */
+  color: #242424;            /* colorNeutralForeground1 */
+  background-color: #ffffff; /* colorNeutralBackground1 */
+  outline: none;
+  transition: border-color 80ms ease;
+  /* Asegurar que el input ocupe todo el espacio disponible */
+  flex: 1;
+}
+
+/* Estado hover */
+.pcf-dir-input:hover:not(:disabled):not(.pcf-dir-input--error) {
+  border-color: #616161; /* colorNeutralStroke1Hover */
+}
+
+/* Estado focus — borde azul Fluent de 2px */
+.pcf-dir-input:focus:not(:disabled) {
+  border-color: #0f6cbd; /* colorBrandStroke1 */
+  border-width: 2px;
+  /* Compensar el px extra del borde para que el contenido no salte */
+  padding: 3px 11px;
+}
+
+/* Estado disabled */
+.pcf-dir-input:disabled {
+  background-color: #f0f0f0; /* colorNeutralBackgroundDisabled */
+  color: #bdbdbd;            /* colorNeutralForegroundDisabled */
+  border-color: #e0e0e0;     /* colorNeutralStrokeDisabled */
+  cursor: not-allowed;
+}
+
+/* Estado error */
+.pcf-dir-input--error {
+  border-color: #bc2f32 !important; /* colorStatusDangerStroke1 */
+}
+
+/* Placeholder */
+.pcf-dir-input::placeholder {
+  color: #919191; /* colorNeutralForeground4 */
+  font-style: normal;
+}
+
+/* ─── Spinner de carga ─────────────────────────────────────────────────────── */
+
+.pcf-dir-loader {
+  position: absolute;
+  right: 10px;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* Spinner SVG animado — no depende de fuentes externas ni imágenes */
+.pcf-dir-loader::after {
+  content: '';
+  display: block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #d1d1d1;
+  border-top-color: #0f6cbd; /* colorBrandBackground */
+  border-radius: 50%;
+  animation: pcf-dir-spin 0.8s linear infinite;
+}
+
+@keyframes pcf-dir-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Dropdown — Fluent UI Listbox ────────────────────────────────────────── */
+
+.pcf-dir-dropdown {
+  position: fixed;
+  max-height: 240px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0; /* colorNeutralStroke2 */
+  border-radius: 4px;        /* borderRadiusMedium */
+  /* Sombra Fluent UI: shadow16 */
+  box-shadow:
+    0 0 2px rgba(0, 0, 0, 0.12),
+    0 4px 8px rgba(0, 0, 0, 0.14);
+  /* z-index alto para superar capas del formulario de D365 */
+  z-index: 9999;
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+  /* Scroll suave */
+  scroll-behavior: smooth;
+}
+
+/* Ítem del dropdown */
+.pcf-dir-dropdown-item {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 8px 12px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 60ms ease;
+}
+
+.pcf-dir-dropdown-item:hover {
+  background-color: #f5f5f5; /* colorNeutralBackground1Hover */
+}
+
+/* Ítem marcado por teclado — outline estilo Fluent UI focus indicator */
+.pcf-dir-dropdown-item--marcado {
+  background-color: #eff6fc; /* colorBrandBackground2 */
+  outline: 2px solid #0f6cbd;
+  outline-offset: -2px;
+}
+
+/* Texto principal del ítem: nombre de calle y número */
+.pcf-dir-item-principal {
+  font-size: 14px;
+  font-weight: 600;          /* semibold — Fluent UI para ítems de lista */
+  color: #242424;            /* colorNeutralForeground1 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Texto secundario: ciudad, región, país */
+.pcf-dir-item-secundario {
+  font-size: 12px;           /* fontSizeBase200 */
+  font-weight: 400;
+  color: #616161;            /* colorNeutralForeground2 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Mensaje de "sin resultados" */
+.pcf-dir-dropdown-empty {
+  padding: 10px 12px;
+  font-size: 13px;
+  color: #919191; /* colorNeutralForeground4 */
+  font-style: italic;
+  cursor: default;
+  user-select: none;
+}
+
+/* Scrollbar estilo Fluent UI (WebKit) */
+.pcf-dir-dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.pcf-dir-dropdown::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.pcf-dir-dropdown::-webkit-scrollbar-thumb {
+  background-color: #bdbdbd;
+  border-radius: 3px;
+}
+
+.pcf-dir-dropdown::-webkit-scrollbar-thumb:hover {
+  background-color: #919191;
+}
+
+/* ─── Mensaje de error ─────────────────────────────────────────────────────── */
+
+.pcf-dir-error {
+  display: none;
+  margin-top: 4px;
+  font-size: 12px;           /* fontSizeBase200 */
+  line-height: 16px;
+  color: #bc2f32;            /* colorStatusDangerForeground1 */
+}
+
+/* ─── Attribution (Google ToS) ─────────────────────────────────────────────── */
+
+.pcf-dir-attribution {
+  min-height: 0;
+  font-size: 10px;
+  color: #bdbdbd;
+  text-align: right;
+  margin-top: 2px;
+}
+
+/* Cuando PlacesService inyecta el logo de Google: dar espacio mínimo */
+.pcf-dir-attribution img {
+  height: 14px;
+  vertical-align: middle;
+  opacity: 0.7;
+}

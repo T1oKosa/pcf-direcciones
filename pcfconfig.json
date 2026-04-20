@@ -1,0 +1,9 @@
+{
+  "solution": {
+    "name": "PCFDireccionesGM",
+    "solnzip": "SolutionPCFDireccionesGM.zip"
+  },
+  "namespace": "PCFDireccionesGM",
+  "name": "DireccionesControlGM",
+  "template": "field"
+}

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest>
+  <control namespace="PCFDirecciones"
+           constructor="DireccionesControl"
+           version="1.0.0"
+           display-name-key="DireccionesControl"
+           description-key="Control PCF para autocompletado de direcciones con Google Places Autocomplete"
+           control-type="standard">
+
+    <!--
+      PROPIEDAD PRIMARIA (bound):
+      Campo de texto principal del formulario. El control reemplaza visualmente
+      este campo y escribe aquí la dirección completa formateada por Google.
+    -->
+    <property name="direccionCompleta"
+              display-name-key="Dirección Completa"
+              description-key="Campo principal de dirección. Contiene la dirección formateada completa."
+              of-type="SingleLine.Text"
+              usage="bound"
+              required="true" />
+
+    <!--
+      PROPIEDADES DE SALIDA (bound):
+      Cada una mapea a un campo distinto del formulario en Power Apps Studio.
+      El maker debe vincular cada propiedad al campo correspondiente de la entidad.
+    -->
+    <property name="calle"
+              display-name-key="Calle"
+              description-key="Nombre de la calle o avenida (route)"
+              of-type="SingleLine.Text"
+              usage="bound"
+              required="false" />
+
+    <property name="numero"
+              display-name-key="Número"
+              description-key="Número exterior (street_number)"
+              of-type="SingleLine.Text"
+              usage="bound"
+              required="false" />
+
+    <property name="ciudad"
+              display-name-key="Ciudad / Comuna"
+              description-key="Localidad o comuna (locality / sublocality)"
+              of-type="SingleLine.Text"
+              usage="bound"
+              required="false" />
+
+    <property name="region"
+              display-name-key="Región / Estado"
+              description-key="División administrativa de nivel 1 (administrative_area_level_1)"
+              of-type="SingleLine.Text"
+              usage="bound"
+              required="false" />
+
+    <property name="pais"
+              display-name-key="País"
+              description-key="Nombre del país"
+              of-type="SingleLine.Text"
+              usage="bound"
+              required="false" />
+
+    <!--
+      Latitud y longitud como SingleLine.Text para máxima compatibilidad con
+      campos de texto existentes en la entidad de Dataverse.
+      Ejemplo de valor: "-33.448890"
+    -->
+    <property name="latitud"
+              display-name-key="Latitud"
+              description-key="Latitud geográfica como texto decimal (ej: -33.448890)"
+              of-type="SingleLine.Text"
+              usage="bound"
+              required="false" />
+
+    <property name="longitud"
+              display-name-key="Longitud"
+              description-key="Longitud geográfica como texto decimal (ej: -70.669265)"
+              of-type="SingleLine.Text"
+              usage="bound"
+              required="false" />
+
+    <!--
+      CONFIGURACIÓN (input):
+      No mapea a un campo del formulario. El maker ingresa el valor estático
+      de la API Key en las propiedades del control en Power Apps Studio.
+      Requiere: Places API + Geocoding API habilitadas en Google Cloud Console.
+    -->
+    <property name="googleApiKey"
+              display-name-key="Google Maps API Key"
+              description-key="API Key de Google Cloud con Places API y Geocoding API habilitadas"
+              of-type="SingleLine.Text"
+              usage="input"
+              required="true" />
+
+    <resources>
+      <code path="index.ts" order="1" />
+      <css path="css/DireccionesControl.css" order="1" />
+    </resources>
+
+  </control>
+</manifest>
