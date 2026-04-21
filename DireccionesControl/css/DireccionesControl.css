@@ -43,55 +43,47 @@
   width: 100%;
 }
 
-/* ─── Input — Fluent UI TextField ─────────────────────────────────────────── */
+/* ─── Input — estilo campo nativo D365 (Fluent UI filled) ────────────────── */
 
 .pcf-dir-input {
   width: 100%;
   min-height: 32px;
-  padding: 4px 12px;
-  border: 1px solid #d1d1d1; /* colorNeutralStroke1 */
-  border-radius: 4px;        /* borderRadiusMedium */
-  font-family: inherit;
-  font-size: 14px;           /* fontSizeBase300 */
-  line-height: 20px;         /* lineHeightBase300 */
-  color: #242424;            /* colorNeutralForeground1 */
-  background-color: #ffffff; /* colorNeutralBackground1 */
+  padding: 5px 8px;
+  border: 1px solid transparent;
+  border-bottom-color: #605e5c;
+  border-radius: 2px;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #323130;
+  background-color: #f3f2f1;
   outline: none;
-  transition: border-color 80ms ease;
-  /* Asegurar que el input ocupe todo el espacio disponible */
+  transition: border-color 80ms ease, background-color 80ms ease;
   flex: 1;
 }
 
-/* Estado hover */
 .pcf-dir-input:hover:not(:disabled):not(.pcf-dir-input--error) {
-  border-color: #616161; /* colorNeutralStroke1Hover */
+  background-color: #edebe9;
+  border-bottom-color: #323130;
 }
 
-/* Estado focus — borde azul Fluent de 2px */
 .pcf-dir-input:focus:not(:disabled) {
-  border-color: #0f6cbd; /* colorBrandStroke1 */
-  border-width: 2px;
-  /* Compensar el px extra del borde para que el contenido no salte */
-  padding: 3px 11px;
+  background-color: #ffffff;
+  border-color: transparent;
+  border-bottom: 2px solid #0078d4;
+  padding-bottom: 4px;
 }
 
-/* Estado disabled */
 .pcf-dir-input:disabled {
-  background-color: #f0f0f0; /* colorNeutralBackgroundDisabled */
-  color: #bdbdbd;            /* colorNeutralForegroundDisabled */
-  border-color: #e0e0e0;     /* colorNeutralStrokeDisabled */
+  background-color: #f3f2f1;
+  color: #a19f9d;
+  border-bottom-color: #c8c6c4;
   cursor: not-allowed;
 }
 
 /* Estado error */
 .pcf-dir-input--error {
-  border-color: #bc2f32 !important; /* colorStatusDangerStroke1 */
-}
-
-/* Placeholder */
-.pcf-dir-input::placeholder {
-  color: #919191; /* colorNeutralForeground4 */
-  font-style: normal;
+  border-bottom: 2px solid #a4262c !important;
 }
 
 /* ─── Spinner de carga ─────────────────────────────────────────────────────── */

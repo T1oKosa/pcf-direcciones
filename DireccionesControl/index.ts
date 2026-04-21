@@ -102,7 +102,6 @@ export class DireccionesControl
 
     this.placesService = new GooglePlacesService(apiKey);
     this.estado.carga = 'ready';
-    this.inputEl.placeholder = 'Buscar direcci\u00f3n\u2026';
     this.inputEl.disabled = context.mode.isControlDisabled;
   }
 
@@ -183,8 +182,7 @@ export class DireccionesControl
     this.inputEl.type = 'text';
     this.inputEl.className = 'pcf-dir-input';
     this.inputEl.value = this.estado.valorInput;
-    this.inputEl.placeholder = 'Buscar direcci\u00f3n\u2026';
-    this.inputEl.disabled = true; // Se habilita cuando Google Maps termina de cargar
+    this.inputEl.disabled = true;
     this.inputEl.setAttribute('autocomplete', 'off');
     this.inputEl.setAttribute('spellcheck', 'false');
     this.inputEl.setAttribute('role', 'combobox');
@@ -474,8 +472,19 @@ export class DireccionesControl
     this.inputEl.value = detalles.direccionCompleta;
     this.outputs = { ...detalles };
 
-    // Notificar al framework PCF — D365 llamará getOutputs() inmediatamente
-    // y persistirá los valores en los campos del formulario mapeados.
+    const partes = [
+      [detalles.calle, detalles.numero].filter(Boolean).join(' '),
+      detalles.ciudad,
+      detalles.region,
+    ].filter(Boolean);
+    const textoFormateado = partes.join(', ');
+    this.inputEl.value = textoFormateado || detalles.direccionCompleta;
+    this.estado.valorInput = this.inputEl.value;
+
+    if (detalles.ciudad) {
+      sessionStorage.setItem('CityAutoAddress', detalles.ciudad);
+    }
+
     this.notifyOutputChangedFn();
   }
 }

@@ -18,7 +18,7 @@ export class GooglePlacesService {
         'Content-Type': 'application/json',
         'X-Goog-Api-Key': this.apiKey,
       },
-      body: JSON.stringify({ input: texto, languageCode: 'es' }),
+      body: JSON.stringify({ input: texto, languageCode: 'es', includedRegionCodes: ['CL'] }),
     });
 
     if (!res.ok) {
