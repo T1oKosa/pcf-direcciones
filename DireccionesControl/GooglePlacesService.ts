@@ -102,10 +102,14 @@ export class GooglePlacesService {
       components.find(c => c.types.indexOf(tipo) >= 0)?.longText ??
       components.find(c => c.types.indexOf(tipo) >= 0)?.long_name ?? '';
 
+    const calleBase = get('route');
+    const numeroBase = get('street_number');
+    const calleConNumero = calleBase && numeroBase ? `${calleBase} ${numeroBase}` : calleBase || numeroBase;
+
     return {
       direccionCompleta: formattedAddress,
-      calle: get('route'),
-      numero: get('street_number'),
+      calle: calleConNumero,
+      numero: numeroBase,
       ciudad: get('locality') || get('sublocality_level_1') || get('sublocality'),
       region: get('administrative_area_level_1'),
       pais: get('country'),

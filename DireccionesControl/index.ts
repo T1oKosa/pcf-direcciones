@@ -468,18 +468,11 @@ export class DireccionesControl
    */
   private aplicarDetalles(detalles: DireccionParseada): void {
     this.estado.seleccion = detalles;
-    this.estado.valorInput = detalles.direccionCompleta;
-    this.inputEl.value = detalles.direccionCompleta;
     this.outputs = { ...detalles };
 
-    const partes = [
-      [detalles.calle, detalles.numero].filter(Boolean).join(' '),
-      detalles.ciudad,
-      detalles.region,
-    ].filter(Boolean);
-    const textoFormateado = partes.join(', ');
-    this.inputEl.value = textoFormateado || detalles.direccionCompleta;
-    this.estado.valorInput = this.inputEl.value;
+    const partes = [detalles.calle, detalles.ciudad, detalles.region].filter(Boolean);
+    this.inputEl.value = detalles.calle;
+    this.estado.valorInput = partes.join(', ') || detalles.direccionCompleta;
 
     if (detalles.ciudad) {
       sessionStorage.setItem('CityAutoAddress', detalles.ciudad);

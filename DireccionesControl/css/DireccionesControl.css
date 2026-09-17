@@ -64,7 +64,6 @@
 
 .pcf-dir-input:hover:not(:disabled):not(.pcf-dir-input--error) {
   background-color: #edebe9;
-  border-bottom-color: #323130;
 }
 
 .pcf-dir-input:focus:not(:disabled) {

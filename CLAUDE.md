@@ -13,7 +13,15 @@ npm run clean      # Eliminar artefactos de compilación
 
 No hay comandos de lint ni tests configurados. TypeScript en modo estricto actúa como verificación de tipos en tiempo de compilación.
 
-Para desplegar: el build genera `Solution/Solution.zip` que se importa en Power Apps Studio.
+## Publicar en Dynamics 365
+
+Después de cada cambio, publicar directamente al entorno con PAC CLI:
+
+```bash
+pac pcf push --publisher-prefix pcfd
+```
+
+Este comando compila el control y lo sube directamente al entorno D365 conectado (`RFSCWE-DESA3`). No es necesario correr `npm run build` antes — `pac pcf push` lo hace internamente. La advertencia de "critical violations" del Solution Checker es esperada en desarrollo y no impide el funcionamiento.
 
 ## Arquitectura
 
